@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Willow Tree · Fitness for the life you want to live</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Calistoga&family=Karla:wght@400;500;700&display=swap">
+<style>
+  :root {
+    --peach: #faa58a;
+    --peach-deep: #b9502f;
+    --cream: #fee8d5;
+    --paper: #fffaf4;
+    --ink: #293138;
+    --ink-soft: #5c6660;
+    --white: #ffffff;
+    --ink-hover: #10161a;
+    --peach-ink: #9c3f22;
+    --font-display: "Calistoga", Georgia, "Times New Roman", serif;
+    --font-body: "Karla", -apple-system, "Segoe UI", Arial, sans-serif;
+    --pill: 999px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; }
+  .shell { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+
+  /* ---------- nav ---------- */
+  .nav { position: sticky; top: 0; z-index: 40; background: var(--paper); border-bottom: 1px solid rgba(41,49,56,.1); }
+  .nav-inner { display: flex; align-items: center; gap: 28px; padding: 14px 0; }
+  .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); margin-right: auto; }
+  .nav-brand img { width: 40px; height: 40px; border-radius: 8px; }
+  .nav-brand span { font-family: var(--font-display); font-size: 21px; letter-spacing: -0.01em; }
+  .nav a.link { color: var(--ink); text-decoration: none; font-weight: 500; font-size: 15px; letter-spacing: 0.02em; }
+  .nav a.link:hover { color: var(--peach-deep); }
+  .btn {
+    display: inline-block; background: var(--ink); color: var(--paper);
+    font-family: var(--font-body); font-weight: 700; font-size: 16px; letter-spacing: 0.02em;
+    text-decoration: none; padding: 14px 26px; border-radius: var(--pill);
+    transition: background-color 180ms ease, transform 180ms ease;
+  }
+  .btn:hover { background: var(--ink-hover); transform: translateY(-1px); }
+  .btn:focus-visible, a:focus-visible { outline: 3px solid var(--peach-deep); outline-offset: 3px; }
+  .nav .btn { padding: 10px 20px; font-size: 14px; }
+  @media (max-width: 720px) { .nav a.link { display: none; } }
+
+  /* ---------- hero ---------- */
+  .hero { background: var(--cream); overflow: hidden; }
+  .hero-head { padding: 72px 0 0; }
+  .eyebrow {
+    font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--peach-deep);
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(42px, 6.4vw, 84px);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+    margin-top: 18px;
+    max-width: 21ch;
+  }
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+  .hero .eyebrow { color: var(--peach-ink); }
+  .rotator { color: var(--peach-ink); }
+  .caret {
+    display: inline-block; width: 0.055em; height: 0.82em; margin-left: 0.04em;
+    background: var(--peach-ink); vertical-align: -0.04em;
+    animation: blink 1.05s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ---------- scroll reveals ---------- */
+  html.js .reveal { opacity: 0; transform: translateY(26px); transition: opacity 650ms ease-out, transform 650ms ease-out; }
+  html.js .reveal.in { opacity: 1; transform: none; }
+  html.js .reveal-stagger > * { opacity: 0; transform: translateY(22px); transition: opacity 600ms ease-out, transform 600ms ease-out; }
+  html.js .reveal-stagger.in > * { opacity: 1; transform: none; }
+  html.js .reveal-stagger.in > *:nth-child(2) { transition-delay: 110ms; }
+  html.js .reveal-stagger.in > *:nth-child(3) { transition-delay: 220ms; }
+  html.js .reveal-stagger.in > *:nth-child(4) { transition-delay: 330ms; }
+  html.js .reveal-stagger.in > *:nth-child(5) { transition-delay: 440ms; }
+  html.js .reveal-stagger.in > *:nth-child(6) { transition-delay: 550ms; }
+  html.js .reveal-stagger.in > *:nth-child(7) { transition-delay: 660ms; }
+  @media (prefers-reduced-motion: reduce) {
+    html.js .reveal, html.js .reveal-stagger > * { opacity: 1; transform: none; transition: none; }
+    .caret { animation: none; }
+    .btn { transition: none; }
+    .btn:hover { transform: none; }
+  }
+  .hero-row { display: grid; grid-template-columns: 5fr 7fr; gap: 48px; align-items: end; padding: 40px 0 0; }
+  .hero-copy { padding-bottom: 64px; }
+  .hero-copy p { font-size: 18px; max-width: 46ch; }
+  .hero-ctas { margin-top: 30px; display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+  .textlink { color: var(--ink); font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+  .textlink:hover { text-decoration-thickness: 3px; }
+  .hero-photo { position: relative; }
+  .hero-photo img { width: 100%; height: 460px; object-fit: cover; }
+  @media (max-width: 860px) {
+    .hero-row { grid-template-columns: 1fr; gap: 8px; }
+    .hero-photo img { height: 320px; }
+    .hero-copy { padding-bottom: 40px; }
+  }
+
+  /* ---------- proof (before the offer) ---------- */
+  .proof { background: var(--cream); padding: 88px 0; }
+  .proof h2 { max-width: 24ch; }
+  .proof-inner { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; padding: 44px 0 0; }
+  .proof b { font-family: var(--font-display); font-weight: 400; font-size: clamp(44px, 5vw, 64px); letter-spacing: -0.02em; display: block; line-height: 1.05; }
+  .proof span { font-size: 15.5px; color: var(--ink-soft); display: block; max-width: 24ch; margin-top: 6px; }
+  .proof-line { margin-top: 40px; font-size: 18px; font-weight: 700; max-width: 54ch; }
+  @media (max-width: 720px) { .proof-inner { grid-template-columns: 1fr; gap: 22px; } }
+
+  /* ---------- problem ---------- */
+  .problem { padding: 96px 0; }
+  .kicker {
+    font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--peach-ink); display: block; margin-bottom: 14px;
+  }
+  h2 {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(32px, 4.4vw, 46px); line-height: 1.12; letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+  .problem-grid { display: grid; grid-template-columns: 5fr 6fr; gap: 64px; }
+  .problem-grid h2 { position: sticky; top: 110px; }
+  .prose p { max-width: 58ch; }
+  .prose p + p { margin-top: 20px; }
+  .prose .land {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(24px, 2.6vw, 31px); line-height: 1.25; letter-spacing: -0.01em;
+    color: var(--peach-deep); max-width: 22ch;
+  }
+  @media (max-width: 860px) { .problem-grid { grid-template-columns: 1fr; gap: 28px; } .problem-grid h2 { position: static; } }
+
+  /* ---------- capability ledger ---------- */
+  .capable { background: var(--cream); padding: 96px 0 110px; }
+  .capable-head { max-width: 62ch; }
+  .capable-head p { margin-top: 18px; font-size: 18px; }
+  .ledger-wrap { display: grid; grid-template-columns: 7fr 5fr; gap: 0; margin-top: 56px; align-items: center; }
+  .ledger { list-style: none; counter-reset: cap; position: relative; z-index: 2; }
+  .ledger li {
+    counter-increment: cap;
+    font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(21px, 2.6vw, 30px); line-height: 1.25; letter-spacing: -0.01em;
+    padding: 20px 28px 20px 0; border-bottom: 1px solid rgba(41,49,56,.18);
+    display: flex; gap: 26px; align-items: baseline;
+    background: var(--cream);
+  }
+  .ledger li::before {
+    content: ""; flex: none; width: 26px; height: 15px; align-self: center;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 14'%3E%3Cpath d='M1 13 C 5 3, 15 0, 23 1 C 20 9, 10 14, 1 13 Z' fill='%23b9502f'/%3E%3C/svg%3E") no-repeat center / contain;
+  }
+  /* the deliberate grid-break: the ledger crosses into the photo column */
+  .ledger { margin-right: -120px; }
+  .ledger-photo { position: relative; z-index: 1; }
+  .ledger-photo img { width: 100%; height: 560px; object-fit: cover; object-position: 50% 30%; }
+  .capable-close { margin-top: 44px; font-size: 18px; font-weight: 700; max-width: 52ch; }
+  @media (max-width: 860px) {
+    .ledger { margin-right: 0; }
+    .ledger-wrap { grid-template-columns: 1fr; gap: 36px; }
+    .ledger-photo img { height: 340px; }
+  }
+
+  /* ---------- pillars ---------- */
+  .pillars { padding: 100px 0; }
+  .pillars-head { max-width: 60ch; margin-bottom: 26px; }
+  .pillar { display: grid; grid-template-columns: 110px 4fr 6fr; gap: 36px; padding: 40px 0; border-top: 1px solid rgba(41,49,56,.16); align-items: start; }
+  .pillar:last-of-type { border-bottom: 1px solid rgba(41,49,56,.16); }
+  .pillar-no { font-family: var(--font-display); font-size: 54px; line-height: 1; letter-spacing: -0.02em; color: var(--ink-soft); }
+  .pillar h3 { font-family: var(--font-display); font-weight: 400; font-size: 25px; line-height: 1.2; letter-spacing: -0.01em; }
+  .pillar p { max-width: 54ch; }
+  .pillar p b { color: var(--peach-ink); }
+  @media (max-width: 860px) {
+    .pillar { grid-template-columns: 1fr; gap: 10px; }
+    .pillar-no { font-size: 40px; }
+  }
+
+  /* ---------- photo band ---------- */
+  .band { display: grid; grid-template-columns: 1fr 1fr; }
+  .band img { width: 100%; height: 420px; object-fit: cover; object-position: 50% 18%; }
+  .band-quote { background: var(--ink); color: var(--paper); display: flex; align-items: center; padding: 48px; }
+  .band-quote p { font-family: var(--font-display); font-size: clamp(24px, 2.8vw, 34px); line-height: 1.25; letter-spacing: -0.01em; max-width: 20ch; }
+  .band-quote p em { font-style: normal; color: var(--peach); }
+  @media (max-width: 860px) { .band { grid-template-columns: 1fr; } .band img { height: 300px; } }
+
+  /* ---------- steps ---------- */
+  .steps { padding: 96px 0; }
+  .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px; margin-top: 48px; }
+  .step small { font-weight: 700; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); }
+  .step h3 { font-family: var(--font-display); font-weight: 400; font-size: 24px; margin: 10px 0 8px; }
+  .step p { font-size: 16px; max-width: 34ch; }
+  @media (max-width: 860px) { .steps-grid { grid-template-columns: 1fr; gap: 28px; } }
+
+  /* ---------- offer (the arrival: dark) ---------- */
+  .offer { background: var(--ink); color: var(--paper); padding: 96px 0; }
+  .offer .kicker { color: var(--peach); }
+  .offer-grid { display: grid; grid-template-columns: 6fr 5fr; gap: 64px; align-items: start; }
+  .price-line { display: flex; align-items: baseline; gap: 16px; margin: 22px 0 6px; }
+  .price { font-family: var(--font-display); font-size: clamp(64px, 8vw, 96px); line-height: 1; letter-spacing: -0.02em; color: var(--peach); }
+  .price-note { font-weight: 700; }
+  .offer-list { list-style: none; margin-top: 8px; }
+  .offer-list li { padding: 13px 0; border-bottom: 1px solid rgba(255,250,244,.22); display: flex; gap: 14px; }
+  .offer-list li::before {
+    content: ""; flex: none; width: 9px; height: 9px; border-radius: 50%;
+    background: var(--paper); margin-top: 9px;
+  }
+  .offer-side p { max-width: 44ch; }
+  .offer-side .btn { margin-top: 24px; background: var(--paper); color: var(--ink); }
+  .offer-side .btn:hover { background: var(--cream); }
+  .offer-side .fine { font-size: 14.5px; margin-top: 14px; color: var(--paper); opacity: .85; }
+  @media (max-width: 860px) {
+    .offer-grid { grid-template-columns: 1fr; gap: 36px; }
+    .price-line { flex-direction: column; align-items: flex-start; gap: 6px; }
+  }
+
+  /* ---------- objections ---------- */
+  .objections { padding: 96px 0; }
+  .qa { margin-top: 40px; }
+  .qa-row { display: grid; grid-template-columns: 5fr 7fr; gap: 40px; padding: 30px 0; border-top: 1px solid rgba(41,49,56,.16); }
+  .qa-row:last-of-type { border-bottom: 1px solid rgba(41,49,56,.16); }
+  .qa-q { font-family: var(--font-display); font-weight: 400; font-size: 23px; line-height: 1.25; letter-spacing: -0.01em; }
+  .qa-a { max-width: 56ch; align-self: center; }
+  @media (max-width: 860px) { .qa-row { grid-template-columns: 1fr; gap: 10px; } }
+
+  /* ---------- close ---------- */
+  .close { background: var(--cream); padding: 100px 0 110px; }
+  .close-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 56px; align-items: center; }
+  .close h2 { font-size: clamp(36px, 5vw, 56px); max-width: 16ch; }
+  .close .prose { margin-top: 20px; }
+  .close-photo img { width: 100%; height: 440px; object-fit: cover; }
+  .close-ctas { margin-top: 30px; display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+  @media (max-width: 860px) { .close-grid { grid-template-columns: 1fr; } .close-photo img { height: 320px; } }
+
+  /* ---------- footer ---------- */
+  footer { background: var(--ink); color: var(--paper); padding: 44px 0; }
+  footer .shell { display: flex; flex-wrap: wrap; gap: 10px 36px; font-size: 14.5px; }
+  footer a { color: var(--paper); }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Main">
+  <div class="shell nav-inner">
+    <a class="nav-brand" href="#top">
+      <img src="img/logo-square.png" alt="Willow Tree Women's Wellness logo" width="40" height="40">
+      <span>Willow Tree</span>
+    </a>
+    <a class="link" href="#different">Why we're different</a>
+    <a class="link" href="#reset">The Reset</a>
+    <a class="link" href="#questions">Questions</a>
+    <a class="btn" href="#reset">Start the Reset · £144</a>
+  </div>
+</nav>
+
+<main id="top">
+
+  <header class="hero">
+    <div class="shell hero-head">
+      <p class="eyebrow">For women over 40 in Wellingborough · perimenopause, menopause and beyond</p>
+      <h1>
+        <span class="visually-hidden">Discover how women over 40 are regaining their health, fitness, wellbeing and self confidence.</span>
+        <span aria-hidden="true">Discover how women over 40 are regaining their<br><span class="rotator" id="rotator">health</span><span class="caret"></span></span>
+      </h1>
+    </div>
+    <div class="shell hero-row">
+      <div class="hero-copy">
+        <p>Willow Tree is a women's wellness centre at Nene Court. Small coached classes across strength, balance, Pilates, yoga and recovery, designed around what a body needs at 45, 55 and 65, by coaches who are living those years too.</p>
+        <div class="hero-ctas">
+          <a class="btn" href="#reset">Start with the 8-Week Reset · £144</a>
+          <a class="textlink" href="#close">Come and look round first</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="img/hero-coach.jpg" alt="A coach laughing with two members over tea at the studio's reception bench after class" width="1536" height="1024">
+      </div>
+    </div>
+  </header>
+
+  <section class="problem">
+    <div class="shell problem-grid reveal">
+      <h2><span class="kicker">The problem</span>Why exercise stopped working somewhere in your forties</h2>
+      <div class="prose">
+        <p>The classes got louder. Your recovery got slower. And the advice never changed: push harder, eat less. That advice was written for 25-year-olds. After 40, falling oestrogen takes muscle, bone density and sleep with it, and training built for someone else's body doesn't just stall. It puts you on the physio's table.</p>
+        <p>So most women quietly stop. Then the shopping gets heavier, the stairs get longer, and "I'm just getting older" starts to sound true.</p>
+        <p class="land">It isn't true. You've been given the wrong training, not the wrong body.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="capable" id="capable">
+    <div class="shell">
+      <div class="capable-head reveal">
+        <h2><span class="kicker">The difference</span>We're not selling workouts. We're keeping you capable.</h2>
+        <p>Most fitness is sold on how you'll look. Ours is built on what you'll be able to do, this year and in thirty years:</p>
+      </div>
+      <div class="ledger-wrap">
+        <ol class="ledger reveal-stagger">
+          <li>Get up off the floor without grabbing the furniture</li>
+          <li>Carry the shopping in from the car in one trip</li>
+          <li>Climb the stairs talking, not catching your breath</li>
+          <li>Stay steady on an icy pavement</li>
+          <li>Lift your case into the overhead locker yourself</li>
+          <li>Spend an afternoon with the grandchildren and still have an evening</li>
+          <li>Keep your independence as the years add up</li>
+        </ol>
+        <div class="ledger-photo reveal">
+          <img src="img/life-floor.jpg" alt="A woman in her fifties sitting on the living room floor, laughing and playing blocks with her toddler grandchild" width="1536" height="1024">
+        </div>
+      </div>
+      <p class="capable-close reveal">Every class on our timetable exists to serve that list. Nothing here is about a transformation photo.</p>
+    </div>
+  </section>
+
+  <section class="pillars" id="different">
+    <div class="shell">
+      <div class="pillars-head reveal">
+        <h2><span class="kicker">How it actually works</span>Four things you won't find in a standard ladies' fitness class</h2>
+      </div>
+
+      <div class="pillar reveal">
+        <div class="pillar-no">01</div>
+        <h3>Built only for women over 40</h3>
+        <p>Hormones, bone density, pelvic health, joints that have history. Most classes are designed for everyone and adapted for you if you ask. Ours are <b>designed for you from the start</b>, because you are the only person we coach.</p>
+      </div>
+
+      <div class="pillar reveal">
+        <div class="pillar-no">02</div>
+        <h3>A full movement menu, one membership</h3>
+        <p>Conditioning, mobility, balance, Power Plate, yoga, Pilates, cardio, Restore &amp; Release. Your body doesn't need the same thing every day, so you never have to choose whether you're "a Pilates person" or "a strength person". <b>You're both, on different days.</b></p>
+      </div>
+
+      <div class="pillar reveal">
+        <div class="pillar-no">03</div>
+        <h3>Coached, not supervised</h3>
+        <p>Classes are kept small enough that a coach notices your balance is weaker on one side, remembers your knee, and changes today's plan because of it. <b>You are known by name here</b>, not a number on a register.</p>
+      </div>
+
+      <div class="pillar reveal">
+        <div class="pillar-no">04</div>
+        <h3>Recovery counts as training</h3>
+        <p>Some days we push. Some days we recover. Both are productive. A midlife body rewards intelligence, not punishment, so stretching, balance and Restore &amp; Release sit on the timetable <b>as equals</b>, not afterthoughts.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" aria-label="Philosophy">
+    <img src="img/life-shopping.jpg" alt="A woman in her fifties striding up a market town high street carrying two full shopping bags" width="1024" height="1536">
+    <div class="band-quote reveal">
+      <p>A class tells you what to do for an hour. A coach helps you build a body <em>for the next thirty years.</em></p>
+    </div>
+  </section>
+
+  <section class="steps">
+    <div class="shell">
+      <h2><span class="kicker">Getting started</span>Three steps, no leap of faith</h2>
+      <div class="steps-grid reveal-stagger">
+        <div class="step">
+          <small>Step one</small>
+          <h3>Message Julie</h3>
+          <p>A WhatsApp or a call. Tell her where you're starting from. No script, no pressure.</p>
+        </div>
+        <div class="step">
+          <small>Step two</small>
+          <h3>Sit down one-to-one</h3>
+          <p>A consultation before anything else, so week one fits your body, your knees and your diary.</p>
+        </div>
+        <div class="step">
+          <small>Step three</small>
+          <h3>Eight coached weeks</h3>
+          <p>The Reset: your first eight weeks with a coach in your corner, finishing with a plan for the 90 days after.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof" aria-label="Proof">
+    <div class="shell">
+      <h2><span class="kicker">Before you decide</span>You won't be the first to take this bet</h2>
+      <div class="proof-inner reveal-stagger">
+        <div><b>81</b><span>members joined in our first month</span></div>
+        <div><b>50</b><span>followed Julie here from her last studio, some after years of training with her</span></div>
+        <div><b>2</b><span>of the coaches walked in as members first</span></div>
+      </div>
+      <p class="proof-line reveal">Women don't follow a coach across town twice for a workout. They do it for someone who knows their knees, their history and their name.</p>
+    </div>
+  </section>
+
+  <section class="offer" id="reset">
+    <div class="shell offer-grid reveal">
+      <div>
+        <h2><span class="kicker">Where everyone starts</span>The 8-Week Menopause Reset</h2>
+        <div class="price-line">
+          <span class="price">£144</span>
+          <span class="price-note">for the full eight weeks</span>
+        </div>
+        <ul class="offer-list">
+          <li>A one-to-one consultation before you start, so week one fits your body, not a template</li>
+          <li>24 coached classes across the eight weeks, chosen from the whole timetable</li>
+          <li>Weekly coaching and food diary reviews, without a fad diet in sight</li>
+          <li>A WhatsApp group that notices when you go quiet</li>
+          <li>A 90-day plan when you finish, so the results don't stop when the programme does</li>
+        </ul>
+      </div>
+      <div class="offer-side">
+        <p>Classes are kept small on purpose, because a coach who can't see you isn't coaching you. Small classes cap how many women can start at once.</p>
+        <a class="btn" href="https://wa.me/447864265263">Start with the 8-Week Reset · £144</a>
+        <p class="fine">Message Julie on 07864 265263 for the next start date.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="objections" id="questions">
+    <div class="shell">
+      <h2><span class="kicker">Said by every woman before she started</span>Honest answers to fair questions</h2>
+      <div class="qa reveal-stagger">
+        <div class="qa-row">
+          <p class="qa-q">"I'm too unfit to start."</p>
+          <p class="qa-a">You start where you are. That is the entire design. The coaches are women in their forties and fifties, and half the room began exactly where you are now.</p>
+        </div>
+        <div class="qa-row">
+          <p class="qa-q">"I don't know what I'm doing."</p>
+          <p class="qa-a">That's what coaching is for. Your first session starts with a conversation, not a fitness test, and nobody is left to guess at the back of the room.</p>
+        </div>
+        <div class="qa-row">
+          <p class="qa-q">"I can't jump around any more."</p>
+          <p class="qa-a">Then you won't. Mobility, balance, Pilates and Restore &amp; Release sit on the same membership as conditioning. Your knees get a say in the plan.</p>
+        </div>
+        <div class="qa-row">
+          <p class="qa-q">"What if I miss a week?"</p>
+          <p class="qa-a">You come back the next one. The WhatsApp group will have noticed you were gone, and that's a feature, not a guilt trip.</p>
+        </div>
+        <div class="qa-row">
+          <p class="qa-q">"I work full time."</p>
+          <p class="qa-a">The first class of the day is at 6am and evening classes run at 5:30pm. The timetable is built around jobs and school runs, not around the studio.</p>
+        </div>
+        <div class="qa-row">
+          <p class="qa-q">"And after the eight weeks?"</p>
+          <p class="qa-a">You choose. Memberships run from £32 a month for four classes and roll month to month with one month's notice. Most women stay because it works, not because anything locks them in.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="close" id="close">
+    <div class="shell close-grid reveal">
+      <div>
+        <h2>Come and see it before you decide anything</h2>
+        <div class="prose">
+          <p>Look round, meet the coaches, watch a class. Then start with the Reset if it feels right. Fifty women have already made this exact decision twice: once years ago with Julie, and again in August when they followed her here.</p>
+        </div>
+        <div class="close-ctas">
+          <a class="btn" href="https://wa.me/447864265263">Start with the 8-Week Reset · £144</a>
+          <a class="textlink" href="tel:07864265263">Or call Julie: 07864 265263</a>
+        </div>
+      </div>
+      <div class="close-photo">
+        <img src="img/group-community.jpg" alt="A group of women in their fifties chatting and laughing together after a class" width="1536" height="1024">
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="shell">
+    <span>Willow Tree Women's Wellness</span>
+    <span>31 Nene Court, Wellingborough NN8 1LD</span>
+    <a href="tel:07864265263">07864 265263</a>
+    <a href="mailto:julie@willowtreewomenswellness.com">julie@willowtreewomenswellness.com</a>
+    <a href="https://www.instagram.com/willowtreewomenswellness/">Instagram</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  document.documentElement.classList.add('js');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // scroll reveals
+  var targets = document.querySelectorAll('.reveal, .reveal-stagger');
+  if (reduced || !('IntersectionObserver' in window)) {
+    targets.forEach(function (t) { t.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    targets.forEach(function (t) { io.observe(t); });
+  }
+
+  // typed rotator
+  var el = document.getElementById('rotator');
+  if (!el) return;
+  var words = ['health', 'fitness', 'wellbeing', 'self confidence'];
+  if (reduced) { el.textContent = words[0]; return; }
+  var wi = 0, ci = words[0].length, deleting = false;
+  function tick() {
+    var word = words[wi];
+    if (!deleting) {
+      ci++;
+      el.textContent = word.slice(0, ci);
+      if (ci >= word.length) { deleting = true; setTimeout(tick, 1900); return; }
+      setTimeout(tick, 85);
+    } else {
+      ci--;
+      el.textContent = word.slice(0, ci);
+      if (ci <= 0) { deleting = false; wi = (wi + 1) % words.length; setTimeout(tick, 350); return; }
+      setTimeout(tick, 45);
+    }
+  }
+  setTimeout(tick, 1400);
+})();
+</script>
+</body>
+</html>
